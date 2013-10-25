@@ -48,6 +48,13 @@ public class Student extends Person implements Comparable<Student> {
 		this.selfEntitled = selfEntitled;
 	}
 
+	public boolean isEqual(Student o){
+		if(compareTo(o) != 0){
+			return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public int compareTo(Student o) {
 		int result = 1;

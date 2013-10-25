@@ -1,7 +1,9 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.GregorianCalendar;
@@ -66,7 +68,29 @@ public class StudentTest {
 		assertEquals("Kenig", scopy.getLastName());
 	}
 	
+	@Test
+	public void constructorWithValidArgumentsFirstLastName(){
+		Student st = new Student("John", "Legend");
+		assertSame("John", st.getFirstName());
+		assertSame("Legend", st.getLastName());
+	}
+	
+	@Test
+	public void IsEqualTrue(){
+		assertTrue(s.isEqual(scopy));
+	}
+	
+	@Test
+	public void IsEqualFalse(){
+		assertFalse(s.isEqual(s2));
+	}
+	
 	//BIRTHDATE TEST
+	@Test(expected=IllegalArgumentException.class)
+	public void WhenBirthDateIsInFuture(){
+		Student st = new Student("John", "Legend", new GregorianCalendar());
+		
+	}
 	
 	//NULL TESTS
 	@Test(expected = IllegalArgumentException.class)
