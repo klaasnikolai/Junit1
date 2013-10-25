@@ -62,7 +62,8 @@ public class StudentTest {
 	public void constructorWithValidArguments() {
 		assertSame("Niko", s.getFirstName());
 		assertSame("Kenig", s.getLastName());
-		assertSame("19931115", s2.getStringBirthDate());
+		String s = s2.getStringBirthDate();
+		assertTrue("19931115".equalsIgnoreCase(s));
 
 		assertEquals("Niko", scopy.getFirstName());
 		assertEquals("Kenig", scopy.getLastName());
