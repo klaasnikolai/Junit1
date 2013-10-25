@@ -50,7 +50,7 @@ public class Student extends Person implements Comparable<Student> {
 
 	@Override
 	public int compareTo(Student o) {
-		int result = 0;
+		int result = 1;
 
 		if (compareLastName(o) == 0) {
 			if (compareFirstName(o) == 0) {

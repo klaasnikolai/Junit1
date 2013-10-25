@@ -2,11 +2,13 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.TreeSet;
+
+import javax.lang.model.element.Element;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,9 +18,10 @@ import daten.Student;
 
 public class StudentTest {
 	private GregorianCalendar cal = new GregorianCalendar(1994,10,06);
-	static Student s = new Student("Niko", "Kenig", new GregorianCalendar(1994,19,06));
+	static Student s = new Student("Niko", "Kenig", new GregorianCalendar(1994,10,06));
 	static Student scopy = new Student("Niko", "Kenig", new GregorianCalendar(1994,10,06));
 	static Student s2 = new Student("Mohamed", "Ata", new GregorianCalendar(1993,11,15));
+	static Student s3 = new Student("Julia", "Schatzi", new GregorianCalendar(1995,07,04));
 	static TreeSet<Student> t = new TreeSet<Student>(new BirthDateComparator());
 	
 	@BeforeClass
@@ -26,21 +29,38 @@ public class StudentTest {
 		t.add(s);
 		t.add(scopy);
 		t.add(s2);
-		System.out.println(t.first().getFirstName());
+		t.add(s3);
+	}
+	
+	@Test
+	public void WhenSortWorks(){
+		assertSame(t.last(), s3);
+		assertSame(t.first(),s2);
+		Iterator iterator = t.iterator();
+		while (iterator.hasNext())
+			System.out.print( iterator.next().toString() + ", " );
+		System.out.println();
 	}
 	
 	//COMPARETO TESTS
-	@Test()
+	@Test
 	public void testIfCompareToWorks(){
-		assertEquals(s.compareTo(s),0);
+		assertEquals(s.compareTo(scopy),0);
 	}
+	
+	@Test
+	public void WhenCompareToIsWrong(){
+		assertEquals(s.compareTo(s2), 1);
+	}
+	
+	
 	
 	//CONSTRUCTOR TESTS
 	@Test
 	public void constructorWithValidArguments() {
 		assertSame("Niko", s.getFirstName());
 		assertSame("Kenig", s.getLastName());
-		assertSame("1994106", s.getStringBirthDate());
+		assertSame("19931115", s2.getStringBirthDate());
 
 		assertEquals("Niko", scopy.getFirstName());
 		assertEquals("Kenig", scopy.getLastName());
